@@ -4,14 +4,14 @@ const Playlist = require('../playlist/model')
 
 const router = new Router();
 
-router.get('/playlists/:id/songs/', (req, res, next) => {
-  const playlistId = req.params.id
+// router.get('/playlists/:id/songs/', (req, res, next) => {
+//   const playlistId = req.params.id
 
-  Song
-  .findAll({where: {playlistId}})    
-  .then(songs => res.status(200).send(songs))
-    .catch(err => res.status(404).send(err))
-});
+//   Song
+//   .findAll({where: {playlistId}})    
+//   .then(songs => res.status(200).send(songs))
+//     .catch(err => res.status(404).send(err))
+// });
 
 router.post('/playlists/:id/songs', (req, res, next) => {
   const playlistId = Number(req.params.id)

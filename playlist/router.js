@@ -51,4 +51,18 @@ router.put('/playlists/:id', (req, res, next) => {
     .caught(err => res.status(404).send(err))
 })
 
+router.delete('/playlists/:id', (req, res, next) => {
+  const playlistId = req.params.id;
+
+  const songsDeleted = Song.destroy({where: {playlistId}})
+
+  const playlistDeleted =Playlist.destroy({ where: {id: playlistId}})
+
+  Promise.all([songsDeleted, playlistDeleted])
+    .then(response => res.status(200).send({songsDeleted, playlistDeleted}))
+    .catch(err => res.status(404).send(err))
+
+
+})
+
 module.exports = router
