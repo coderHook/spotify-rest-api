@@ -1,5 +1,6 @@
 const express = require('express') 
 const db = require('./db.js')
+const playlist = require('./playlist/model.js')
 
 
 const app = express()
