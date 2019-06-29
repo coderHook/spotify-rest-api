@@ -3,24 +3,25 @@ const Playlist = require('./model')
 const Song = require('../songs/model')
 const auth = require('../auth/middleware.js');
 
-
 const router = new Router();
 
 router.get('/playlists', auth, (req, res, next) => {
+  // console.log('User in playlist', data)
+
   Playlist
     .findAll()
     .then(playlists => res.status(200).send(playlists))
     .catch(err => res.status(500).next(err))
 });
 
-router.post('/playlists', (req, res, next) => {
+router.post('/playlists', auth, (req, res, next) => {
   Playlist
     .create(req.body)
     .then(newData => res.status(201).send(newData))
     .catch(err => res.status(422).next(err))
 })
 
-router.get('/playlists/:id', (req, res, next) => {
+router.get('/playlists/:id', auth, (req, res, next) => {
   const id = req.params.id
 
   //As I understand the exercise, once I go to an Id I retrieve the Playlist info + the songs in that playlist.
@@ -40,7 +41,7 @@ router.get('/playlists/:id', (req, res, next) => {
     .catch(err => res.status(404).send(err))
 });
 
-router.put('/playlists/:id', (req, res, next) => {
+router.put('/playlists/:id', auth, (req, res, next) => {
   const id = req.params.id;
 
   Playlist
@@ -53,7 +54,7 @@ router.put('/playlists/:id', (req, res, next) => {
     .caught(err => res.status(404).send(err))
 })
 
-router.delete('/playlists/:id', (req, res, next) => {
+router.delete('/playlists/:id', auth, (req, res, next) => {
   const playlistId = req.params.id;
 
   const songsDeleted = Song.destroy({where: {playlistId}})
