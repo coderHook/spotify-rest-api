@@ -20,10 +20,11 @@ router.post('/playlists', (req, res, next) => {
 router.get('/playlists/:id', (req, res, next) => {
   const id = req.params.id
 
+  //As I understand the exercise, once I go to an Id I just have to retrieve the songs from that Playlist
   Playlist
     .findByPk(id)
     .then(playlist => { 
-      playlist.id && res.status(201).send(playlist)
+      playlist.id && res.status(200).send(playlist)
     })
     .catch(err => res.status(404).send(err))
 });
