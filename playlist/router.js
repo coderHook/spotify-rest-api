@@ -3,21 +3,21 @@ const Playlist = require('./model')
 
 const router = new Router();
 
-router.get('/playlist', (req, res, next) => {
+router.get('/playlists', (req, res, next) => {
   Playlist
     .findAll()
     .then(playlists => res.status(200).send(playlists))
     .catch(err => res.status(500).next(err))
 });
 
-router.post('/playlist', (req, res, next) => {
+router.post('/playlists', (req, res, next) => {
   Playlist
     .create(req.body)
     .then(newData => res.status(201).send(newData))
     .catch(err => res.status(422).next(err))
 })
 
-router.get('/playlist/:id', (req, res, next) => {
+router.get('/playlists/:id', (req, res, next) => {
   const id = req.params.id
 
   Playlist
@@ -28,7 +28,7 @@ router.get('/playlist/:id', (req, res, next) => {
     .catch(err => res.status(404).send(err))
 });
 
-router.put('/playlist/:id', (req, res, next) => {
+router.put('/playlists/:id', (req, res, next) => {
   const id = req.params.id;
 
   Playlist

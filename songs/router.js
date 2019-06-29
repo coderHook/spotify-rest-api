@@ -3,7 +3,7 @@ const Song = require('./model')
 
 const router = new Router();
 
-router.get('/playlist/:id/songs/', (req, res, next) => {
+router.get('/playlists/:id/songs/', (req, res, next) => {
   const playlist = req.params.id
 
   Song
