@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 
 const router = new Router();
 
-router.post('/user', (req, res, next)=> {
+router.post('/users', (req, res, next)=> {
 
   const user = {
     email: req.body.email,

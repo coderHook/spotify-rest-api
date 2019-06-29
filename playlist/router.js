@@ -1,10 +1,12 @@
 const Router = require('express')
 const Playlist = require('./model')
 const Song = require('../songs/model')
+const auth = require('../auth/middleware.js');
+
 
 const router = new Router();
 
-router.get('/playlists', (req, res, next) => {
+router.get('/playlists', auth, (req, res, next) => {
   Playlist
     .findAll()
     .then(playlists => res.status(200).send(playlists))
