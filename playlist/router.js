@@ -17,4 +17,28 @@ router.post('/playlist', (req, res, next) => {
     .catch(err => res.status(422).next(err))
 })
 
+router.get('/playlist/:id', (req, res, next) => {
+  const id = req.params.id
+
+  Playlist
+    .findByPk(id)
+    .then(playlist => { 
+      playlist.id && res.status(201).send(playlist)
+    })
+    .catch(err => res.status(404).send(err))
+});
+
+router.put('/playlist/:id', (req, res, next) => {
+  const id = req.params.id;
+
+  Playlist
+    .findByPk(id)
+    .then(playlist => 
+      playlist
+        .update(req.body)
+        .then(updatedPlaylist => res.status(200).send(updatedPlaylist))      
+    )
+    .caught(err => res.status(404).send(err))
+})
+
 module.exports = router
