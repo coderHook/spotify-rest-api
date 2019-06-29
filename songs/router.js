@@ -8,8 +8,6 @@ const router = new Router();
 router.post('/playlists/:id/songs', auth, (req, res, next) => {
   const playlistId = Number(req.params.id)
 
-  console.log('Request BODY', req.body)
-
   const data = req.body
 
   if(!data.playlistId){ data.playlistId = playlistId } 
@@ -21,7 +19,25 @@ router.post('/playlists/:id/songs', auth, (req, res, next) => {
     }
     )
     .catch(err => res.status(404).send(err))
+})
 
+router.put('/playlists/:id/songs/:idSong', (req, res, next) => {
+  const playlistId = Number(req.params.id)
+  const songId = Number(req.params.idSong)
+
+  const data = req.body
+
+  if(!data.playlistId){ data.playlistId = playlistId } 
+
+  Song
+    .findByPk(songId)
+    .then( song => 
+      song
+        .update(data)
+        .then(songUpdated => res.status(200).send(songUpdated))
+        .catch(err => res.status(404).send(err))
+      )
+      .catch(err => res.status(404).send(err))
 })
 
 module.exports = router;
