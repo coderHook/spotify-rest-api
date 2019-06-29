@@ -40,4 +40,12 @@ router.put('/playlists/:id/songs/:idSong', (req, res, next) => {
       .catch(err => res.status(404).send(err))
 })
 
+router.delete('/playlists/:id/songs/:songId', auth, (req, res, next) => {
+  const songId = Number(req.params.idSong)
+
+  const songsDeleted = Song
+          .destroy({where: {playlistId}})
+          .then(response => res.status(200).send({songsDeleted, playlistDeleted}))
+          .catch(err => res.status(404).send(err))
+})
 module.exports = router;
