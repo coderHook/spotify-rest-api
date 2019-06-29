@@ -21,7 +21,7 @@ router.post('/playlists/:id/songs', auth, (req, res, next) => {
     .catch(err => res.status(404).send(err))
 })
 
-router.put('/playlists/:id/songs/:idSong', (req, res, next) => {
+router.put('/playlists/:id/songs/:idSong', auth, (req, res, next) => {
   const playlistId = Number(req.params.id)
   const songId = Number(req.params.idSong)
 
